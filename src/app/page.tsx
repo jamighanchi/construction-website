@@ -1,58 +1,122 @@
 "use client";
 
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
+
 import {
   Building2,
   Hammer,
   Phone,
   ArrowRight,
+  Menu,
+  X,
 } from "lucide-react";
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_59m5u3t",
+        "template_qoa8sph",
+        e.target,
+        "U0QTuQraVWv3dV5o0"
+      )
+      .then(
+        () => {
+          alert("Message Sent Successfully 🔥");
+        },
+        () => {
+          alert("Failed to send message ❌");
+        }
+      );
+
+    e.target.reset();
+  };
+
   return (
-    <main className="bg-black text-white overflow-hidden">
+    <main className="bg-black text-white overflow-hidden scroll-smooth">
 
       {/* NAVBAR */}
       <nav className="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
+
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
           <h1 className="text-2xl md:text-3xl font-bold tracking-wide">
             Build<span className="text-orange-500">X</span>
           </h1>
 
+          {/* DESKTOP MENU */}
           <div className="hidden md:flex gap-8 text-sm font-medium">
-            <a href="#" className="hover:text-orange-500 transition">
+
+            <a href="#home" className="hover:text-orange-500 transition">
               Home
             </a>
 
-            <a href="#" className="hover:text-orange-500 transition">
+            <a href="#services" className="hover:text-orange-500 transition">
               Services
             </a>
 
-            <a href="#" className="hover:text-orange-500 transition">
+            <a href="#projects" className="hover:text-orange-500 transition">
               Projects
             </a>
 
-            <a href="#" className="hover:text-orange-500 transition">
+            <a href="#contact" className="hover:text-orange-500 transition">
               Contact
             </a>
+
           </div>
 
+          {/* MOBILE MENU BUTTON */}
+          <button
+            className="md:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={30} /> : <Menu size={30} />}
+          </button>
+
         </div>
+
+        {/* MOBILE MENU */}
+        {menuOpen && (
+          <div className="md:hidden bg-black border-t border-white/10 px-6 py-6 flex flex-col gap-6 text-lg">
+
+            <a href="#home" onClick={() => setMenuOpen(false)}>
+              Home
+            </a>
+
+            <a href="#services" onClick={() => setMenuOpen(false)}>
+              Services
+            </a>
+
+            <a href="#projects" onClick={() => setMenuOpen(false)}>
+              Projects
+            </a>
+
+            <a href="#contact" onClick={() => setMenuOpen(false)}>
+              Contact
+            </a>
+
+          </div>
+        )}
+
       </nav>
 
       {/* HERO SECTION */}
       <section
+        id="home"
         className="relative h-screen flex items-center justify-center text-center px-6 bg-cover bg-center"
         style={{
           backgroundImage: "url('/hero.png')",
         }}
       >
 
-        {/* DARK OVERLAY */}
         <div className="absolute inset-0 bg-black/70"></div>
 
-        {/* EXTRA GRADIENT */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black"></div>
 
         <motion.div
@@ -78,14 +142,20 @@ export default function Home() {
 
           <div className="mt-12 flex flex-col sm:flex-row justify-center gap-6">
 
-            <button className="bg-orange-500 hover:bg-orange-600 px-10 py-5 rounded-full font-semibold text-lg flex items-center justify-center gap-3 transition duration-300 shadow-2xl">
+            <a
+              href="#projects"
+              className="bg-orange-500 hover:bg-orange-600 px-10 py-5 rounded-full font-semibold text-lg flex items-center justify-center gap-3 transition duration-300 shadow-2xl"
+            >
               Our Projects
               <ArrowRight size={22} />
-            </button>
+            </a>
 
-            <button className="border border-white/30 backdrop-blur-md hover:bg-white hover:text-black px-10 py-5 rounded-full font-semibold text-lg transition duration-300">
+            <a
+              href="#contact"
+              className="border border-white/30 backdrop-blur-md hover:bg-white hover:text-black px-10 py-5 rounded-full font-semibold text-lg transition duration-300"
+            >
               Contact Us
-            </button>
+            </a>
 
           </div>
 
@@ -98,7 +168,6 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
-          {/* LEFT SIDE */}
           <motion.div
             initial={{ opacity: 0, x: -80 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -116,8 +185,7 @@ export default function Home() {
 
             <p className="text-gray-400 text-lg leading-relaxed mb-8">
               We provide premium construction services with modern architecture,
-              elegant interiors, and trusted workmanship. Our goal is to build
-              beautiful spaces that match your dream lifestyle.
+              elegant interiors, and trusted workmanship.
             </p>
 
             <button className="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-full font-semibold transition">
@@ -126,7 +194,6 @@ export default function Home() {
 
           </motion.div>
 
-          {/* RIGHT SIDE */}
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -135,43 +202,23 @@ export default function Home() {
           >
 
             <div className="bg-zinc-900 border border-white/10 rounded-3xl p-10 text-center">
-              <h3 className="text-5xl font-bold text-orange-500 mb-4">
-                10+
-              </h3>
-
-              <p className="text-gray-400">
-                Projects Completed
-              </p>
+              <h3 className="text-5xl font-bold text-orange-500 mb-4">10+</h3>
+              <p className="text-gray-400">Projects Completed</p>
             </div>
 
             <div className="bg-zinc-900 border border-white/10 rounded-3xl p-10 text-center">
-              <h3 className="text-5xl font-bold text-orange-500 mb-4">
-                5+
-              </h3>
-
-              <p className="text-gray-400">
-                Years Experience
-              </p>
+              <h3 className="text-5xl font-bold text-orange-500 mb-4">5+</h3>
+              <p className="text-gray-400">Years Experience</p>
             </div>
 
             <div className="bg-zinc-900 border border-white/10 rounded-3xl p-10 text-center">
-              <h3 className="text-5xl font-bold text-orange-500 mb-4">
-                100%
-              </h3>
-
-              <p className="text-gray-400">
-                Client Satisfaction
-              </p>
+              <h3 className="text-5xl font-bold text-orange-500 mb-4">100%</h3>
+              <p className="text-gray-400">Client Satisfaction</p>
             </div>
 
             <div className="bg-zinc-900 border border-white/10 rounded-3xl p-10 text-center">
-              <h3 className="text-5xl font-bold text-orange-500 mb-4">
-                24/7
-              </h3>
-
-              <p className="text-gray-400">
-                Support Available
-              </p>
+              <h3 className="text-5xl font-bold text-orange-500 mb-4">24/7</h3>
+              <p className="text-gray-400">Support Available</p>
             </div>
 
           </motion.div>
@@ -181,7 +228,10 @@ export default function Home() {
       </section>
 
       {/* SERVICES */}
-      <section className="py-28 px-6 bg-zinc-950">
+      <section
+        id="services"
+        className="py-28 px-6 bg-zinc-950"
+      >
 
         <div className="max-w-7xl mx-auto">
 
@@ -225,7 +275,7 @@ export default function Home() {
               </h3>
 
               <p className="text-gray-400">
-                Transform old properties into luxury modern spaces with expert renovation.
+                Transform old properties into luxury modern spaces.
               </p>
             </motion.div>
 
@@ -240,7 +290,7 @@ export default function Home() {
               </h3>
 
               <p className="text-gray-400">
-                Get expert construction guidance and planning for your dream project.
+                Get expert guidance for your dream project.
               </p>
             </motion.div>
 
@@ -251,7 +301,10 @@ export default function Home() {
       </section>
 
       {/* PROJECTS */}
-      <section className="py-28 px-6 bg-black">
+      <section
+        id="projects"
+        className="py-28 px-6 bg-black"
+      >
 
         <div className="max-w-7xl mx-auto">
 
@@ -300,12 +353,16 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section className="py-28 px-6 bg-zinc-950 text-center">
+      <section
+        id="contact"
+        className="py-28 px-6 bg-zinc-950 text-center"
+      >
 
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
+          className="max-w-3xl mx-auto"
         >
 
           <p className="text-orange-500 uppercase tracking-[5px] mb-4">
@@ -316,13 +373,47 @@ export default function Home() {
             Let’s Build Something Amazing
           </h2>
 
-          <p className="text-gray-400 max-w-2xl mx-auto mb-10">
+          <p className="text-gray-400 mb-10">
             Contact us today to discuss your dream construction project.
           </p>
 
-          <button className="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-full font-semibold transition">
-            Contact Now
-          </button>
+          <form
+            onSubmit={sendEmail}
+            className="grid gap-6"
+          >
+
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              className="bg-black border border-white/10 rounded-2xl px-6 py-4 outline-none"
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              className="bg-black border border-white/10 rounded-2xl px-6 py-4 outline-none"
+            />
+
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows={6}
+              required
+              className="bg-black border border-white/10 rounded-2xl px-6 py-4 outline-none"
+            />
+
+            <button
+              type="submit"
+              className="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-full font-semibold transition"
+            >
+              Send Message
+            </button>
+
+          </form>
 
         </motion.div>
 
@@ -333,7 +424,6 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
 
-          {/* BRAND */}
           <div>
 
             <h2 className="text-3xl font-bold mb-4">
@@ -341,13 +431,11 @@ export default function Home() {
             </h2>
 
             <p className="text-gray-400 leading-relaxed">
-              Premium construction solutions with modern design,
-              trusted quality, and luxury craftsmanship.
+              Premium construction solutions with modern design and luxury craftsmanship.
             </p>
 
           </div>
 
-          {/* QUICK LINKS */}
           <div>
 
             <h3 className="text-xl font-semibold mb-5">
@@ -355,36 +443,14 @@ export default function Home() {
             </h3>
 
             <ul className="space-y-3 text-gray-400">
-
-              <li>
-                <a href="#" className="hover:text-orange-500 transition">
-                  Home
-                </a>
-              </li>
-
-              <li>
-                <a href="#" className="hover:text-orange-500 transition">
-                  Services
-                </a>
-              </li>
-
-              <li>
-                <a href="#" className="hover:text-orange-500 transition">
-                  Projects
-                </a>
-              </li>
-
-              <li>
-                <a href="#" className="hover:text-orange-500 transition">
-                  Contact
-                </a>
-              </li>
-
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#contact">Contact</a></li>
             </ul>
 
           </div>
 
-          {/* SERVICES */}
           <div>
 
             <h3 className="text-xl font-semibold mb-5">
@@ -400,7 +466,6 @@ export default function Home() {
 
           </div>
 
-          {/* CONTACT */}
           <div>
 
             <h3 className="text-xl font-semibold mb-5">
@@ -417,7 +482,6 @@ export default function Home() {
 
         </div>
 
-        {/* COPYRIGHT */}
         <div className="border-t border-white/10 mt-12 pt-6 text-center text-gray-500 text-sm">
           © 2026 BuildX Construction. All rights reserved.
         </div>

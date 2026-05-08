@@ -100,7 +100,7 @@ export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
 
   return (
-    <main className="relative min-h-screen bg-black text-white overflow-hidden">
+    <main className="relative min-h-screen bg-black text-white overflow-x-hidden">
 
       {/* BACKGROUND GLOWS */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-orange-500/20 blur-[120px] rounded-full"></div>
@@ -138,12 +138,12 @@ export default function ProjectsPage() {
 
             </div>
 
-            <h1 className="text-3xl sm:text-5xl md:text-8xl font-bold leading-tight mb-8 max-w-6xl">
+            <h1 className="text-[34px] sm:text-5xl md:text-8xl font-bold leading-[1.1] mb-6 md:mb-8 max-w-6xl">
               Our Modern
               <span className="text-orange-500"> Project Gallery</span>
             </h1>
 
-            <p className="text-gray-400 text-base md:text-2xl leading-relaxed max-w-4xl">
+            <p className="text-gray-400 text-[15px] md:text-2xl leading-7 md:leading-relaxed max-w-4xl">
               Explore premium architecture, luxury interiors,
               bungalow elevations, and cinematic 3D visualization
               projects designed with creativity and precision.
@@ -161,14 +161,14 @@ export default function ProjectsPage() {
         {/* STATS */}
         <div className="max-w-7xl mx-auto mb-24">
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
 
             <motion.div
               whileHover={{ y: -8 }}
               className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[25px] p-6 md:p-10 text-center"
             >
 
-              <h2 className="text-3xl md:text-5xl font-bold text-orange-500 mb-4">
+              <h2 className="text-2xl md:text-5xl font-bold text-orange-500 mb-2 md:mb-4">
                 50+
               </h2>
 
@@ -183,7 +183,7 @@ export default function ProjectsPage() {
               className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[25px] p-6 md:p-10 text-center"
             >
 
-              <h2 className="text-3xl md:text-5xl font-bold text-orange-500 mb-4">
+              <h2 className="text-2xl md:text-5xl font-bold text-orange-500 mb-2 md:mb-4">
                 10+
               </h2>
 
@@ -198,7 +198,7 @@ export default function ProjectsPage() {
               className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[25px] p-6 md:p-10 text-center"
             >
 
-              <h2 className="text-3xl md:text-5xl font-bold text-orange-500 mb-4">
+              <h2 className="text-2xl md:text-5xl font-bold text-orange-500 mb-2 md:mb-4">
                 5+
               </h2>
 
@@ -213,7 +213,7 @@ export default function ProjectsPage() {
               className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[25px] p-6 md:p-10 text-center"
             >
 
-              <h2 className="text-3xl md:text-5xl font-bold text-orange-500 mb-4">
+              <h2 className="text-2xl md:text-5xl font-bold text-orange-500 mb-2 md:mb-4">
                 100%
               </h2>
 
@@ -235,7 +235,7 @@ export default function ProjectsPage() {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-5 md:px-8 py-3 text-sm md:text-base rounded-full border transition duration-300 ${
+             className={`px-4 md:px-8 py-2.5 md:py-3 text-xs sm:text-sm md:text-base rounded-full border transition duration-300 ${
                 activeCategory === category
                   ? "bg-orange-500 border-orange-500 text-white"
                   : "border-white/10 bg-white/5 hover:bg-orange-500"
@@ -249,7 +249,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* PROJECT GRID */}
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 xl:grid-cols-3 gap-10">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-10">
 
           {projects
             .filter(
@@ -275,7 +275,7 @@ export default function ProjectsPage() {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="h-[320px] sm:h-[420px] md:h-[600px] w-full object-cover transition duration-700 group-hover:scale-110"
+                    lassName="h-[260px] sm:h-[420px] md:h-[600px] w-full object-cover transition duration-700 group-hover:scale-110"
                   />
 
                 </div>
@@ -284,7 +284,7 @@ export default function ProjectsPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
 
                 {/* CONTENT */}
-                <div className="absolute bottom-0 left-0 p-4 sm:p-5 md:p-8 w-full">
+                <div className="absolute bottom-0 left-0 p-4 md:p-8 w-full">
 
                   <div className="flex items-center justify-between mb-4">
 
@@ -300,11 +300,11 @@ export default function ProjectsPage() {
 
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 md:mb-4 group-hover:text-orange-500 transition duration-300">
+                  <h3 className="text-lg sm:text-2xl md:text-3xl font-bold leading-tight mb-2 md:mb-4 group-hover:text-orange-500 transition duration-300">
                     {project.title}
                   </h3>
 
-                  <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-6 md:mb-8">
+                  <p className="text-gray-300 text-[13px] md:text-base leading-6 md:leading-relaxed mb-5 md:mb-8">
                     {project.description}
                   </p>
 
@@ -355,7 +355,7 @@ export default function ProjectsPage() {
 
               </button>
 
-              <div className="grid lg:grid-cols-2 gap-0">
+              <div className="grid lg:grid-cols-2 gap-0 max-h-[95vh] overflow-y-auto">
 
                 {/* IMAGE */}
                 <div className="overflow-hidden h-full">
@@ -363,7 +363,7 @@ export default function ProjectsPage() {
                   <img
                     src={selectedProject.image}
                     alt={selectedProject.title}
-                    className="h-[300px] md:h-full w-full object-cover"
+                    className="h-[220px] md:h-full w-full object-cover"
                   />
 
                 </div>
@@ -375,7 +375,7 @@ export default function ProjectsPage() {
                     {selectedProject.category}
                   </p>
 
-                  <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-6">
+                  <h2 className="text-2xl md:text-5xl font-bold leading-tight mb-4 md:mb-6">
                     {selectedProject.title}
                   </h2>
 
@@ -393,7 +393,7 @@ export default function ProjectsPage() {
 
                   </div>
 
-                  <p className="text-gray-300 leading-relaxed text-sm md:text-lg mb-10">
+                  <p className="text-gray-300 leading-7 text-[14px] md:text-lg mb-8 md:mb-10">
                     {selectedProject.details}
                   </p>
 

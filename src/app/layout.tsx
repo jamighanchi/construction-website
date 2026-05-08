@@ -10,7 +10,8 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "BuildX Construction",
-  description: "Modern Construction Website",
+  description:
+    "Premium construction company offering luxury homes, modern architecture, renovation, and interior solutions.",
 };
 
 export default function RootLayout({
